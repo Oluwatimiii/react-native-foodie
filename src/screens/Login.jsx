@@ -72,7 +72,7 @@ const Login = ({ navigation }) => {
       await signInWithEmailAndPassword(authentication, email, password)
         .then((val) => {
           setLoggingIn(true);
-          Alert.alert("Account created");
+          Alert.alert("Login Successful");
           navigation.replace("Dashboard");
           console.log(val);
         })

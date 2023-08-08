@@ -57,7 +57,7 @@ export default function App() {
       <SafeAreaView style={styles.container}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Splash"
+            initialRouteName="Dashboard"
             screenOptions={{
               headerShown: false,
             }}
