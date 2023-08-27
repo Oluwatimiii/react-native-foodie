@@ -3,43 +3,44 @@ import {
   Text,
   Image,
   ScrollView,
-  StyleSheet,
   ActivityIndicator,
+  StyleSheet,
   TextInput,
   TouchableOpacity,
   Alert,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { myTheme } from "../utils/Theme";
+import { myTheme } from "../../utils/Theme";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { authentication } from "../../config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../../../firebase";
 
-const Login = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
   const [toogleBtn, setToogleBtn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [checkBox, setCheckBox] = useState(false);
+
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     setLoading(false);
+  //     setTimeout(() => {
+  //       navigation.navigate("Login");
+  //     }, 2000);
+  //   }
+  // }, []);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
 
   const [showErrors, setShowErrors] = useState(false);
-  const [loggingIn, setLoggingIn] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const [userCredential, setUserCredential] = useState({
-    email: "",
-    password: "",
-  });
-  const { email, password } = userCredential;
-
-  useEffect(() => {
-    if (loggingIn) {
-      setLoading(false);
-      setTimeout(() => {
-        navigation.replace("Login");
-      }, 2000);
-    }
-  }, []);
 
   const getErrors = (email, password) => {
     const errors = {};
@@ -59,26 +60,40 @@ const Login = ({ navigation }) => {
     return errors;
   };
 
-  const handleSignIn = async () => {
+  const handleSignUp = async () => {
+    setLoading(true);
     const errors = getErrors(email, password);
     if (Object.keys(errors).length > 0) {
       setShowErrors(true);
+      setLoading(false)
       setErrors(showErrors && errors);
       console.log(errors);
     } else {
-      setLoading(true);
       setErrors({});
       setShowErrors(false);
-      await signInWithEmailAndPassword(authentication, email, password)
-        .then((val) => {
-          setLoggingIn(true);
-          Alert.alert("Login Successful");
-          navigation.replace("Dashboard");
-          console.log(val);
+
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log("user cred", userCredential);
+          const userEmail = userCredential?._tokenResponse.email;
+          const userUid = auth.currentUser.uid;
+
+          setDoc(doc(db, "users", `${userUid}`), {
+            email: userEmail,
+            phone: phone,
+          });
+          Alert.alert("Signed up")
+          // setLoggedIn(true);
         })
         .catch((error) => {
-          setLoading(false)
-          Alert.alert(error.message);
+          if (error.code === "auth/email-already-in-use") {
+            console.log("That email address is already in use!");
+          }
+
+          if (error.code === "auth/invalid-email") {
+            console.log("That email address is invalid!");
+          }
+          console.error(error);
         });
     }
   };
@@ -91,26 +106,34 @@ const Login = ({ navigation }) => {
         <View style={styles.imgContainer}>
           <Image
             style={styles.logoImage}
-            source={require("./../../assets/fast-food.png")}
+            source={require("../../../assets/fast-food.png")}
           />
         </View>
 
         {/* Form Input */}
         <View style={styles.formBox}>
-          <Text style={styles.formText1}>Welcome back!</Text>
-          <Text style={styles.formText2}>Login to continue using the app.</Text>
+          <Text style={styles.formText1}>Create an account.</Text>
+          <Text style={styles.formText2}>Kindly provide your details</Text>
 
           <View style={styles.formBox1}>
+            <View>
+              <Text style={styles.userNameText}>Phone number</Text>
+              <TextInput
+                style={styles.userNameInput}
+                value={phone}
+                onChangeText={(text) => setPhone(text)}
+                placeholder="Input phone no.."
+                placeholderTextColor={myTheme.fade}
+                keyboardType="name-phone-pad"
+              />
+            </View>
             <View>
               <Text style={styles.userNameText}>Email address</Text>
               <TextInput
                 style={styles.userNameInput}
-                value={email}
-                onChangeText={(text) => {
-                  setUserCredential({ ...userCredential, email: text });
-                }}
-                autoCorrect={false}
                 placeholder="Hellofoodie@gmail.com"
+                value={email}
+                onChangeText={(text) => setEmail(text)}
                 placeholderTextColor={myTheme.fade}
                 keyboardType="email-address"
               />
@@ -122,7 +145,7 @@ const Login = ({ navigation }) => {
                     marginTop: 4,
                   }}
                 >
-                 {errors.email}
+                  {errors.email}
                 </Text>
               )}
             </View>
@@ -140,15 +163,9 @@ const Login = ({ navigation }) => {
                 <TextInput
                   secureTextEntry={toogleBtn ? true : false}
                   style={{ paddingVertical: 7, width: "100%", flex: 0.9 }}
-                  value={password}
-                  onChangeText={(textPass) => {
-                    setUserCredential({
-                      ...userCredential,
-                      password: textPass,
-                    });
-                  }}
-                  autoCorrect={false}
                   placeholder="Input your password"
+                  value={password}
+                  onChangeText={(text) => setPassword(text)}
                   placeholderTextColor={myTheme.fade}
                   keyboardType="ascii-capable"
                 />
@@ -174,30 +191,25 @@ const Login = ({ navigation }) => {
             </View>
           </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingHorizontal: 10,
-            }}
-          >
+          {/* CheckBox Segment */}
+          <View style={styles.checkBox}>
             <BouncyCheckbox
-              size={17}
+              size={20}
               fillColor={myTheme.primary}
               unfillColor="#FFFFFF"
-              text="Remember me"
-              iconStyle={{
-                borderColor: `${myTheme.primary}`,
-                marginRight: -10,
+              isChecked={checkBox}
+              iconStyle={{ borderColor: `${myTheme.primary}` }}
+              innerIconStyle={{ borderWidth: 2 }}
+              onPress={() => {
+                setCheckBox(!checkBox);
               }}
-              innerIconStyle={{ borderWidth: 2, borderRadius: 0 }}
-              onPress={() => {}}
             />
-
-            <TouchableOpacity>
-              <Text style={{ color: myTheme.primary }}>Forget Password?</Text>
-            </TouchableOpacity>
+            <Text style={styles.checkBoxText}>
+              <Text>By continuing you agree to our </Text>
+              <Text style={{ color: myTheme.primary }}>
+                Terms of Services and Privacy Policy.
+              </Text>
+            </Text>
           </View>
 
           {loading ? (
@@ -206,20 +218,22 @@ const Login = ({ navigation }) => {
           ) : (
             // SIGN UP BUTTON
             <TouchableOpacity
-              onPress={() => handleSignIn(email, password)}
-              style={styles.signUpBox}
+              disabled={!checkBox}
+              style={styles.signUpBox(checkBox)}
+              onPress={handleSignUp}
             >
-              <Text style={styles.signUpText}>Login</Text>
+              <Text style={styles.signUpText}>Sign Up</Text>
             </TouchableOpacity>
           )}
 
+          {/* SIGN IN SEGMENT */}
           <View style={styles.signInBox}>
             <Text style={{ fontSize: 15, color: myTheme.fade }}>
-              Don't have an account?
+              Already have an account?
             </Text>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("SignUp");
+                navigation.navigate("Login");
               }}
             >
               <Text
@@ -229,55 +243,7 @@ const Login = ({ navigation }) => {
                   fontWeight: "600",
                 }}
               >
-                Sign Up
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={{ paddingVertical: 20 }}>
-            <View
-              style={{
-                position: "relative",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
-              }}
-            >
-              <View
-                style={{
-                  height: 1,
-                  width: "80%",
-                  backgroundColor: myTheme.tertiary,
-                  position: "absolute",
-                }}
-              />
-              <Text
-                style={{
-                  padding: 10,
-                  backgroundColor: myTheme.secondary,
-                  fontSize: 20,
-                }}
-              >
-                Or
-              </Text>
-            </View>
-
-            <TouchableOpacity
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
-                height: 55,
-                gap: 20,
-                marginTop: 20,
-                borderWidth: 1,
-                borderRadius: 15,
-                borderColor: myTheme.primary,
-              }}
-            >
-              <AntDesign name="google" size={24} color={myTheme.primary} />
-              <Text style={{ fontSize: 17, color: myTheme.primary }}>
-                Sign in with Google
+                Sign In
               </Text>
             </TouchableOpacity>
           </View>
@@ -305,13 +271,13 @@ const styles = StyleSheet.create({
   },
   formBox1: {
     paddingTop: 30,
-    paddingBottom: 35,
+    paddingBottom: 60,
   },
   formText1: {
     fontSize: 40,
     color: myTheme.tertiary,
     fontWeight: "bold",
-    marginBottom: 1,
+    marginBottom: 3,
   },
   formText2: {
     fontSize: 18,
@@ -336,15 +302,15 @@ const styles = StyleSheet.create({
     marginTop: 30,
     gap: 6,
   },
-  signUpBox: {
-    backgroundColor: myTheme.primary,
+  signUpBox: (checkBoxState) => ({
+    backgroundColor: checkBoxState ? myTheme.primary : myTheme.fade,
     borderRadius: 15,
     marginTop: 30,
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
     height: 55,
-  },
+  }),
   signUpText: {
     color: myTheme.secondary,
     fontSize: 18,
@@ -363,4 +329,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default SignUp;

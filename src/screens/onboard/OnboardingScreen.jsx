@@ -8,18 +8,18 @@ import {
 import React from "react";
 import Onboarding from "react-native-onboarding-swiper";
 import LottieView from "lottie-react-native";
-import { myTheme } from "../utils/Theme";
+import { myTheme } from "../../utils/Theme";
 import { useNavigation } from "@react-navigation/native";
-import { setItem } from "../utils/asyncStorage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width, height } = Dimensions.get("window");
 
 export default function OnboardingScreen() {
   const nav = useNavigation();
 
-  const handleDone = () => {
-    nav.navigate("Splash");
-    setItem("onboarded", "1")
+  const handleDone = async () => {
+    await AsyncStorage.setItem("onboarded", JSON.stringify(false))
+    nav.navigate("Login");
   };
 
   const doneBtn = ({ ...props }) => {
@@ -44,42 +44,42 @@ export default function OnboardingScreen() {
             image: (
               <View style={styles.lottieStyle}>
                 <LottieView
-                  source={require("./../../assets/animations/anim2.json")}
+                  source={require("../../../assets/animations/anim2.json")}
                   autoPlay
                   loop
                 />
               </View>
             ),
-            title: "Onboarding",
-            subtitle: "Done with React Native Onboarding Swiper",
+            title: "Welcome to Foodie",
+            subtitle: "No 1 online store to satisfy your cravings.",
           },
           {
             backgroundColor: "#a78bff",
             image: (
               <View style={styles.lottieStyle}>
                 <LottieView
-                  source={require("./../../assets/animations/anim1.json")}
+                  source={require("../../../assets/animations/anim1.json")}
                   autoPlay
                   loop
                 />
               </View>
             ),
-            title: "Onboarding",
-            subtitle: "Done with React Native Onboarding Swiper",
+            title: "Enjoy a smooth order experience",
+            subtitle: "Create an account and order!",
           },
           {
             backgroundColor: myTheme.primary,
             image: (
               <View style={styles.lottieStyle}>
                 <LottieView
-                  source={require("./../../assets/animations/anim3.json")}
+                  source={require("../../../assets/animations/anim3.json")}
                   autoPlay
                   loop
                 />
               </View>
             ),
-            title: "Onboarding",
-            subtitle: "Done with React Native Onboarding Swiper",
+            title: "Ready to eat?",
+            subtitle: "Food is ready!",
           },
         ]}
       />
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   lottieStyle: {
     width: width * 0.9,
-    height: width,
+    height: width * 0.5,
   },
   doneBtn: {
     padding: 20,

@@ -26,18 +26,43 @@ const Filters = () => {
         <FlatList
           data={data}
           renderItem={({ item }) => (
-            <TouchableOpacity key={item.id}>
-              <View>
-                <View>
-                  <Image source={{ uri: item?.bgImg }} />
+            <View
+              style={{
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <TouchableOpacity
+                key={item.id}
+                style={{
+                  position: "relative",
+                  overflow: "hidden",
+                  marginBottom: 5,
+                  borderRadius: 10,
+                }}
+              >
+                <View style={styles.imgBox}>
+                  <Image
+                    style={styles.img}
+                    source={{ uri: item?.bgImg }}
+                    resizeMode="cover"
+                  />
                 </View>
-                <Text>{item?.text}</Text>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                }}
+              >
+                {item.text}
+              </Text>
+            </View>
           )}
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ columnGap: 6 }}
+          contentContainerStyle={{ columnGap: 15 }}
+          key={(item) => item.id}
         ></FlatList>
       </View>
     </View>
@@ -46,4 +71,14 @@ const Filters = () => {
 
 export default Filters;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  imgBox: {
+    width: 80,
+    height: 50,
+    borderRadius: 10,
+  },
+  img: {
+    width: "100%",
+    height: "100%",
+  },
+});

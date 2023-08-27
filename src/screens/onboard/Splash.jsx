@@ -1,16 +1,33 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import { myTheme } from "./../utils/Theme";
+import { myTheme } from "../../utils/Theme";
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+//import { useSelector } from "react-redux";
 
 export default function Splash() {
   const nav = useNavigation();
+  const [onboard, setOnboard] = useState(null);
+
+  AsyncStorage.getItem("onboarded", (err, value) => {  
+    if (err) {
+      console.log(err);
+    } else {
+      setOnboard(JSON.parse(value));
+    }
+  });
 
   useEffect(() => {
-    setTimeout(() => {
-        nav.replace("Login");
-    }, 2000);
+    if (onboard === 1) {
+      setTimeout(() => {
+        nav.navigate("Onboarding");
+      }, 2000);
+    } else {
+      setTimeout(() => {
+        nav.navigate("Login");
+      }, 2000);
+    }
   }, []);
 
   return (
@@ -20,7 +37,7 @@ export default function Splash() {
       <View style={styles.logoBox}>
         <Image
           style={styles.logoImage}
-          source={require("./../../assets/fast-food.png")}
+          source={require("../../../assets/fast-food.png")}
         />
 
         <View>

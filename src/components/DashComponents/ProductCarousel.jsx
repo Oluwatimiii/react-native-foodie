@@ -16,9 +16,18 @@ import {
 } from "react-native-responsive-dimensions";
 import React, { useState } from "react";
 import ProductTitle from "./ProductTitle";
+import { useNavigation } from "@react-navigation/native";
 
 const ProductCarousel = ({ text, viewAll, datas }) => {
   const [data, setData] = useState(datas);
+  const navigation = useNavigation();
+
+  const handlePress = (id) => {
+    navigation.push("Details", {
+      productId: id,
+      dataFile: data,
+    });
+  };
 
   return (
     <View>
@@ -34,13 +43,13 @@ const ProductCarousel = ({ text, viewAll, datas }) => {
           data={data}
           renderItem={({ item }) => (
             <TouchableOpacity
+              onPress={() => handlePress(item.id)}
               key={item?.id}
               style={{
                 position: "relative",
                 overflow: "hidden",
                 height: responsiveHeight(22),
                 width: responsiveWidth(60),
-                marginRight: 10,
                 marginBottom: 5,
                 borderRadius: 10,
                 ...Platform.select({
@@ -171,7 +180,7 @@ const ProductCarousel = ({ text, viewAll, datas }) => {
           )}
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ columnGap: 6 }}
+          contentContainerStyle={{ columnGap: 11 }}
         />
       </View>
     </View>
