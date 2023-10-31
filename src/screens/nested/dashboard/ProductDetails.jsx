@@ -12,13 +12,9 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { myTheme } from "../../../utils/Theme";
 import { HeartIcon } from "react-native-heroicons/solid";
-import { FontAwesome } from "@expo/vector-icons";
 import { ChevronLeftIcon } from "react-native-heroicons/outline";
 import { Feather } from "@expo/vector-icons";
-import {
-  productCarouseldata1,
-  productCarouseldata2,
-} from "../../../components/data/data";
+import { productCarouseldata2 } from "../../../components/data/data";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import {
@@ -27,7 +23,8 @@ import {
 } from "react-native-responsive-dimensions";
 import ProductCarousel from "../../../components/DashComponents/ProductCarousel";
 import OrderProducts from "../../../components/OrderComponents/OrderProducts";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setDataCart } from "../../../../store/UserSlice";
 
 const ios = Platform.OS === "ios";
 
@@ -37,12 +34,22 @@ const ProductDetails = ({ route, navigation }) => {
     .map((item) => item.quantity * item.amount)
     .reduce((curr, prev) => curr + prev, 0);
 
+  const dispatch = useDispatch();
+
   const [favBtn, setFavBtn] = useState(false);
   const [openSimilar, setOpenSimilar] = useState(false);
 
   const { productId, dataFile } = route.params;
+
   const data = dataFile.filter((data) => data?.id === productId);
-  console.log(data)
+  console.log("data0", data[0]);
+
+  const setCart = () => {
+    dispatch(setDataCart(data[0]));
+    navigation.navigate("CartStack", {
+      screen: "Cart",
+    });
+  };
 
   return (
     <>
@@ -66,12 +73,12 @@ const ProductDetails = ({ route, navigation }) => {
             </TouchableOpacity>
 
             <View style={styles.searchView}>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={styles.iconBg}
-                onPress={() => navigation.goBack()}
+                // onPress={() => navigation.goBack()}
               >
                 <FontAwesome name="search" size={22} color="black" />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               <TouchableOpacity
                 style={styles.iconBg}
@@ -210,6 +217,7 @@ const ProductDetails = ({ route, navigation }) => {
                 text="Similar near you"
                 viewAll={false}
                 datas={productCarouseldata2}
+                horizon={true}
               />
             )}
 
@@ -218,6 +226,7 @@ const ProductDetails = ({ route, navigation }) => {
             <ProductCarousel
               text="More to explore"
               viewAll={true}
+              horizon={true}
               datas={productCarouseldata2}
             />
           </View>
@@ -226,11 +235,7 @@ const ProductDetails = ({ route, navigation }) => {
 
       {total === 0 ? null : (
         <Pressable
-          onPress={() =>
-            navigation.navigate("CartStack", {
-              screen: "Cart",
-            })
-          }
+          onPress={setCart}
           style={{
             backgroundColor: myTheme.tertiary,
             padding: 12,

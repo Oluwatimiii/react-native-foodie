@@ -5,11 +5,13 @@ import {
   ScrollView,
   Alert,
   TouchableOpacity,
+  Modal,
+  Pressable,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { myTheme } from "../../utils/Theme";
-
+import * as Location from "expo-location";
 import HomeSearchIcon from "../../components/DashComponents/HomeSearchIcon";
 import HomeCarousel from "../../components/DashComponents/HomeCarousel";
 import ProductCarousel from "../../components/DashComponents/ProductCarousel";
@@ -18,61 +20,84 @@ import {
   productCarouseldata,
   productCarouseldata1,
   productCarouseldata2,
+  filterData,
 } from "../../components/data/data";
-import * as Location from "expo-location";
 
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { Foundation } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
-import { setUserLocation } from "../../../store/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setDisplayStore, setUserLocation } from "../../../store/UserSlice";
+import { clearCart } from "../../../store/CartReducer";
+import { responsiveWidth } from "react-native-responsive-dimensions";
+
+import BottomSheet from "../../components/DashComponents/BottomSheet";
 
 export default function Dashboard({ navigation }) {
-  const [currentAdd, setCurrentAdd] = useState("Location loading...");
-  const [currentStreet, setCurrentStreet] = useState("Street loading...");
+  const [errorMsg, setErrorMsg] = useState("");
   const [locationEnabled, setLocationEnabled] = useState(false);
 
   const dispatch = useDispatch();
+  const displayStore = useSelector((state) => state.user.displayStore);
+  const location = useSelector((state) => state.user.userLocation);
+
+  const clearCarts = () => {
+    dispatch(clearCart([]));
+    dispatch(setDisplayStore(false));
+  };
+
+  const enableLocation = () => {
+    setErrorMsg("")
+    getBackgroundLocationPermission()
+  }
+
+  // const bottomSheetRef = useRef(null)
+
+  // const openModal = () => {
+  //   bottomSheetRef.current?.present()
+  // }
 
   useEffect(() => {
     checkLocationEnabled();
-    getCurrentLocation();
-  }, []);
+  }, [errorMsg]);
 
   const checkLocationEnabled = async () => {
     let enabled = await Location.hasServicesEnabledAsync();
 
     if (!enabled) {
-      Alert.alert("Location granted", [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") },
-      ]);
+      setLocationEnabled(false)
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg('Permission to access background location was denied');
+      } else {
+        setLocationEnabled(true)
+        Alert.alert("Enable location", "Please enable locations in settings to update it. Your location is safe and important for the delivery process.", [
+          {
+            text: "Cancel",
+            onPress: () => setErrorMsg('Permission to access location was denied'),
+            style: "cancel",
+          },
+          { text: "Open settings", onPress: () => enableLocation() },
+        ]);
+      }
     } else {
-      setLocationEnabled(enabled);
+      getCurrentLocation()
     }
   };
 
-  const getCurrentLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert(
-        "Location access granted",
-        "Enable location services in settings.",
-        [
-          {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel",
-          },
-          { text: "OK", onPress: () => console.log("OK Pressed") },
-        ]
-      );
+  const getBackgroundLocationPermission = async () => {
+    const { status } = await Location.requestBackgroundPermissionsAsync();
+    if (status !== 'granted') {
+      setErrorMsg('Permission to access background location was denied');
+    } else {
+      getCurrentLocation()
+      console.log("location granted")
     }
+  };
 
+
+  const getCurrentLocation = async () => {
     const { coords } = await Location.getCurrentPositionAsync({});
     if (coords) {
       const { latitude, longitude } = coords;
@@ -83,22 +108,13 @@ export default function Dashboard({ navigation }) {
       });
 
       for (let item of response) {
-        let preciseAddress = `${item.city}, ${item.region} - ${item.country}`;
-        let preciseStreet = `${
-          item?.street ? item?.street : "No street found"
-        }`;
+        const setLocations = `${item?.street ? item?.street : "No street found"}, ${item?.city}, ${item?.region} - ${item.country}`;
 
-        const setLocations = `${
-          item?.street ? item?.street : "No street found"
-        }, ${item.city}, ${item.region} - ${item.country}`;
-
-        console.log("dashboard", setLocations);
         dispatch(setUserLocation(setLocations));
-        setCurrentAdd(preciseAddress);
-        setCurrentStreet(preciseStreet);
       }
     }
   };
+
 
   return (
     <SafeAreaView
@@ -122,13 +138,16 @@ export default function Dashboard({ navigation }) {
         <View style={styles.logoBox}>
           <Entypo name="location" size={20} color={myTheme.primary} />
           <View>
-            <Text style={styles.splashText1}>{currentStreet}</Text>
+            <Text style={styles.splashText1}>{location.slice(0, 15)}-</Text>
             <Text style={styles.splashText} numberOfLines={1}>
-              {currentAdd}
+              {errorMsg !== "" ? errorMsg : location.slice(15)}
             </Text>
           </View>
-          <AntDesign name="arrowdown" size={15} color={myTheme.primary} />
+          <TouchableOpacity onPress={() => checkLocationEnabled()}>
+            <Foundation name="refresh" size={20} color={myTheme.primary} />
+          </TouchableOpacity>
         </View>
+
 
         <TouchableOpacity onPress={() => navigation.navigate("Discount")}>
           <MaterialCommunityIcons
@@ -143,23 +162,68 @@ export default function Dashboard({ navigation }) {
         <HomeSearchIcon />
       </View>
 
+      <Modal
+        animationType="slide"
+        transparent={true}
+        presentationStyle="overFullScreen"
+        visible={displayStore}
+        onRequestClose={() => dispatch(setDisplayStore(false))}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={[styles.modalText, { fontWeight: "bold", fontSize: 18, color: myTheme.primary }]}>
+              Hold on..
+            </Text>
+            <Text style={[styles.modalText, { fontWeight: "bold" }]}>
+              You are trying to swtich to another restaurant. This action will
+              clear your cart.
+            </Text>
+
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                gap: 9,
+              }}
+            >
+              <Pressable
+                style={[styles.button, styles.buttonClose, { backgroundColor: "red" }]}
+                onPress={() => dispatch(setDisplayStore(false))}
+              >
+                <Text style={styles.textStyle}>CANCEL</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, styles.buttonClose, { backgroundColor: "green" }]}
+                onPress={clearCarts}
+              >
+                <Text style={styles.textStyle}>PROCEED</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <HomeCarousel />
-        <Filters />
+        <Filters datas={filterData} />
         <ProductCarousel
           text="Top Deals"
           viewAll={true}
           datas={productCarouseldata}
+          horizon={true}
         />
         <ProductCarousel
           text="Featured Outlets"
           viewAll={true}
           datas={productCarouseldata1}
+          horizon={true}
         />
         <ProductCarousel
           text="Recommended"
           viewAll={true}
           datas={productCarouseldata2}
+          horizon={true}
         />
       </ScrollView>
     </SafeAreaView>
@@ -179,13 +243,54 @@ const styles = StyleSheet.create({
     width: 30,
   },
   splashText: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: "400",
     color: myTheme.tertiary,
   },
   splashText1: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "400",
     color: myTheme.tertiary,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.7)",
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: responsiveWidth(85),
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: myTheme.primary,
+  },
+  buttonClose: {
+    backgroundColor: myTheme.primary,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });

@@ -1,8 +1,6 @@
 import {
   Image,
-  Platform,
   Pressable,
-  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -31,16 +29,20 @@ const Checkout = () => {
   const location = useSelector((state) => state.user.userLocation);
   // Fetching cart details
   const cart = useSelector((state) => state.cart.cart);
+  const dataCheckout = useSelector((state) => state.user.dataCart);
+  console.log("checkd", dataCheckout);
+
   const total = cart
     .map((item) => item.quantity * item.amount)
     .reduce((curr, prev) => curr + prev, 0);
   const newTotal = total + 1500;
 
+  // Getting Current restaurant details
   // Clearing cart after proceeding to successful
   const dispatch = useDispatch();
 
   const [selectedValue, setSelectedValue] = useState("");
-  const [address, setAddress] = useState(location);
+  const [address, setAddress] = useState("");
   const [instructions, setInstructions] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
@@ -53,7 +55,7 @@ const Checkout = () => {
   };
 
   const handleSaveButtonClick = () => {
-    setIsEditing(false); 
+    setIsEditing(false);
   };
 
   const navigation = useNavigation();
@@ -80,19 +82,15 @@ const Checkout = () => {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "center",
           borderColor: myTheme.fade,
           borderBottomWidth: 0.5,
           borderTopWidth: 0.5,
-          paddingHorizontal: responsiveWidth(13),
+          paddingHorizontal: responsiveWidth(8),
           paddingVertical: 15,
         }}
       >
         <View style={styles.imgBox}>
-          <Image
-            style={styles.image}
-            source={require("../../../../assets/fast-food.png")}
-          />
+          <Image style={styles.image} source={{ uri: dataCheckout?.bgImg }} />
         </View>
 
         {/* Cart Order Details */}
@@ -101,12 +99,13 @@ const Checkout = () => {
             paddingLeft: 10,
           }}
         >
-          <Text style={{ fontWeight: "bold", fontSize: 17 }}>Trilogy Cafe</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 17 }}>
+            {dataCheckout?.text}
+          </Text>
           <Text
             style={{ fontWeight: "400", fontSize: 14, color: myTheme.fade }}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic,
-            laboriosam?
+            {dataCheckout?.location}
           </Text>
         </View>
       </View>
@@ -154,13 +153,13 @@ const Checkout = () => {
                 fontSize: 14,
               }}
               placeholder="Please enter your address"
-              value={address}
+              defaultValue={location}
               onChangeText={(value) => setAddress(value)}
             />
           ) : (
             <View>
               <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-                {address}
+                {location}
               </Text>
             </View>
           )}

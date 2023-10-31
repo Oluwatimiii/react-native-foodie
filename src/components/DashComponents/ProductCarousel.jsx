@@ -17,16 +17,35 @@ import {
 import React, { useState } from "react";
 import ProductTitle from "./ProductTitle";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { setDisplayStore } from "../../../store/UserSlice";
 
-const ProductCarousel = ({ text, viewAll, datas }) => {
-  const [data, setData] = useState(datas);
+const ProductCarousel = ({ text, viewAll, datas, horizon }) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart.cart);
+  // const displayStore = useSelector((state) => state.user.displayStore);
 
   const handlePress = (id) => {
-    navigation.push("Details", {
-      productId: id,
-      dataFile: data,
-    });
+    const clickedStore = datas.filter((data) => data?.id === id);
+    const storeName = clickedStore[0].text;
+
+    const storeNotPresent = cart?.some((item) => item?.storeName !== storeName);
+    console.log(storeNotPresent, "Not in cart");
+    console.log(storeName);
+
+    if (storeNotPresent === false) {
+      navigation.navigate("HomeStack", {
+        screen: "Details",
+        params: {
+          productId: id,
+          dataFile: datas,
+        },
+      });
+    } else {
+      dispatch(setDisplayStore(true));
+    }
   };
 
   return (
@@ -40,7 +59,7 @@ const ProductCarousel = ({ text, viewAll, datas }) => {
         }}
       >
         <FlatList
-          data={data}
+          data={datas}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => handlePress(item.id)}
@@ -48,10 +67,12 @@ const ProductCarousel = ({ text, viewAll, datas }) => {
               style={{
                 position: "relative",
                 overflow: "hidden",
-                height: responsiveHeight(22),
-                width: responsiveWidth(60),
+                height: responsiveHeight(horizon ? 22 : 27),
+                width: responsiveWidth(horizon ? 60 : 90),
                 marginBottom: 5,
-                borderRadius: 10,
+                borderColor: "gray",
+                borderWidth: 0.3,
+                borderRadius: 9,
                 ...Platform.select({
                   ios: {
                     shadowColor: "black",
@@ -178,9 +199,10 @@ const ProductCarousel = ({ text, viewAll, datas }) => {
               </ImageBackground>
             </TouchableOpacity>
           )}
-          horizontal
+          horizontal={horizon}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ columnGap: 11 }}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ columnGap: 11, rowGap: 10 }}
         />
       </View>
     </View>

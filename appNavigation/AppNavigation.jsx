@@ -14,7 +14,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { ChevronLeftIcon } from "react-native-heroicons/outline";
 
-import Support from "../src/screens/home/Support";
 import Cart from "../src/screens/home/Cart";
 import Profile from "../src/screens/home/Profile";
 import Splash from "../src/screens/onboard/Splash";
@@ -34,24 +33,9 @@ import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Payment from "../src/screens/nested/cart/Payment";
 import Successful from "../src/screens/nested/cart/Successful";
+import LocationSearch from "../src/screens/onboard/LocationSearch";
 
-const HomeStack = createNativeStackNavigator();
 
-const HomeStackScreen = () => {
-  return (
-    <HomeStack.Navigator
-      initialRouteName="Dashboard"
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <HomeStack.Screen name="Dashboard" component={Dashboard} />
-      <HomeStack.Screen name="Details" component={ProductDetails} />
-      <HomeStack.Screen name="OrderDetails" component={OrderDetails} />
-      <HomeStack.Screen name="Discount" component={Discount} />
-    </HomeStack.Navigator>
-  );
-};
 
 const AuthStack = createNativeStackNavigator();
 
@@ -76,6 +60,41 @@ const RootTab = createBottomTabNavigator();
 export default function AppNavigation() {
   const navigation = useNavigation();
 
+  //Home stack
+  const HomeStack = createNativeStackNavigator();
+
+  const HomeStackScreen = () => {
+    return (
+      <HomeStack.Navigator
+        initialRouteName="Splash"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <HomeStack.Screen name="Splash" component={Splash} />
+        <HomeStack.Screen name="Dashboard" component={Dashboard} />
+        <HomeStack.Screen name="Details" component={ProductDetails} />
+        <HomeStack.Screen name="OrderDetails" component={OrderDetails} />
+        <HomeStack.Screen name="Discount" component={Discount} />
+        {/* <HomeStack.Screen name="Location" component={LocationSearch} options={{
+          title: "Location",
+          presentation: "fullScreenModal",
+          headerShown: true,
+          headerLeft: () => (
+            <TouchableOpacity
+              style={styles.iconBg}
+              onPress={() => navigation.goBack()}
+            >
+              <ChevronLeftIcon size="20" strokeWidth={2} color="white" />
+            </TouchableOpacity>
+          ),
+        }} /> */}
+
+      </HomeStack.Navigator>
+    );
+  };
+
+  // CART STACK
   const CartStack = createNativeStackNavigator();
 
   const CartStackScreen = () => {
@@ -136,17 +155,19 @@ export default function AppNavigation() {
       </CartStack.Navigator>
     );
   };
+
+  // Getting the current user state(logged in or not)
   const user = useSelector((state) => state.user.user);
-  console.log(user);
+  console.log("userstate", user);
   const dispatch = useDispatch();
 
+  // Setting the userState to control the displayed stack
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("useUserApp", user);
         dispatch(setUser(true));
       } else {
-        dispatch(setUser(false));
+        return;
       }
     });
 
@@ -156,12 +177,14 @@ export default function AppNavigation() {
   // Setting cart badge
   const cart = useSelector((state) => state.cart.cart);
 
+  // Hiding the tab bar on specific screens
   const getTabBarVisibility = (route) => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? "Feed";
 
     if (
       routeName === "Details" ||
       routeName === "OrderDetails" ||
+      routeName === "Splash" ||
       routeName === "Discount" ||
       routeName === "Checkout"
     ) {
@@ -230,18 +253,6 @@ export default function AppNavigation() {
                 );
               },
             })}
-          />
-          <RootTab.Screen
-            name="Support"
-            component={Support}
-            options={{
-              headerShown: false,
-              tabBarIcon: ({ color, size }) => {
-                return (
-                  <AntDesign name="customerservice" size={size} color={color} />
-                );
-              },
-            }}
           />
           <RootTab.Screen
             name="Profile"

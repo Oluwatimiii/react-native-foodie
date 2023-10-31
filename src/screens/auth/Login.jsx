@@ -178,7 +178,7 @@ const Login = ({ navigation }) => {
                 marginRight: -10,
               }}
               innerIconStyle={{ borderWidth: 2, borderRadius: 0 }}
-              onPress={() => {}}
+              onPress={() => { }}
             />
 
             <TouchableOpacity>

@@ -18,6 +18,8 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
+import { setUserData } from "../../../store/UserSlice";
+import { useDispatch } from "react-redux";
 
 const SignUp = ({ navigation }) => {
   const [toogleBtn, setToogleBtn] = useState(true);
@@ -25,15 +27,6 @@ const SignUp = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   const [checkBox, setCheckBox] = useState(false);
-
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     setLoading(false);
-  //     setTimeout(() => {
-  //       navigation.navigate("Login");
-  //     }, 2000);
-  //   }
-  // }, []);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,11 +54,13 @@ const SignUp = ({ navigation }) => {
   };
 
   const handleSignUp = async () => {
+    const dispatch = useDispatch();
+
     setLoading(true);
     const errors = getErrors(email, password);
     if (Object.keys(errors).length > 0) {
       setShowErrors(true);
-      setLoading(false)
+      setLoading(false);
       setErrors(showErrors && errors);
       console.log(errors);
     } else {
@@ -74,16 +69,15 @@ const SignUp = ({ navigation }) => {
 
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          console.log("user cred", userCredential);
           const userEmail = userCredential?._tokenResponse.email;
+          dispatch(setUserData(userEmail));
           const userUid = auth.currentUser.uid;
 
           setDoc(doc(db, "users", `${userUid}`), {
             email: userEmail,
             phone: phone,
           });
-          Alert.alert("Signed up")
-          // setLoggedIn(true);
+          Alert.alert("Signed up");
         })
         .catch((error) => {
           if (error.code === "auth/email-already-in-use") {

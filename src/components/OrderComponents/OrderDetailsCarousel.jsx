@@ -31,7 +31,6 @@ const OrderDetailsCarousel = ({ text, viewAll, datas }) => {
 
   useEffect(() => {
     if (foodProduct.length > 0) {
-      console.log("greater");
       return;
     }
 

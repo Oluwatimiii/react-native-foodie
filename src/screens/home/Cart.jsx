@@ -26,6 +26,7 @@ import {
   incrementQuantity,
 } from "../../../store/CartReducer";
 import { decrementQty, incrementQty } from "../../../store/ProductReducer";
+import { useRoute } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -49,7 +50,7 @@ const Cart = ({ navigation }) => {
   // Fetching cart details
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
-  console.log(cart)
+  // console.log(cart)
   const total = cart
     .map((item) => item.quantity * item.amount)
     .reduce((curr, prev) => curr + prev, 0);

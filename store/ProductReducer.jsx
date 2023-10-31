@@ -29,9 +29,12 @@ export const productSlice = createSlice({
         itemPresent.quantity--;
       }
     },
+    clearProduct: (state) => {
+      state.product = [];
+    },
   },
 });
 
-export const { getProducts, incrementQty, decrementQty } = productSlice.actions;
+export const { getProducts, incrementQty, decrementQty, clearProduct } = productSlice.actions;
 
 export default productSlice.reducer;

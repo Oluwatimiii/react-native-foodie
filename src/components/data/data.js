@@ -56,6 +56,7 @@ export const productCarouseldata = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Espresso Cafe",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -75,6 +76,7 @@ export const productCarouseldata = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Espresso Cafe",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -94,6 +96,7 @@ export const productCarouseldata = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Espresso Cafe",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -113,6 +116,7 @@ export const productCarouseldata = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Espresso Cafe",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -133,6 +137,7 @@ export const productCarouseldata = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Espresso Cafe",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -163,6 +168,7 @@ export const productCarouseldata = [
         prevAmount: "4,200.00",
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
+        storeName: "Albert Coffee",
         checkedName: "",
         quantity: 0,
         checklist: [
@@ -182,6 +188,7 @@ export const productCarouseldata = [
         prevAmount: "3,800.00",
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
+        storeName: "Albert Coffee",
         checkedName: "",
         quantity: 0,
         checklist: [
@@ -201,6 +208,7 @@ export const productCarouseldata = [
         prevAmount: "6,200.00",
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
+        storeName: "Albert Coffee",
         checkedName: "",
         quantity: 0,
         checklist: [
@@ -220,6 +228,7 @@ export const productCarouseldata = [
         prevAmount: "4,100.00",
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
+        storeName: "Albert Coffee",
         checkedName: "",
         quantity: 0,
         checklist: [
@@ -240,6 +249,7 @@ export const productCarouseldata = [
         description:
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
+        storeName: "Albert Coffee",
         checkedName: "",
         quantity: 0,
         checklist: [
@@ -272,6 +282,7 @@ export const productCarouseldata = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -291,6 +302,7 @@ export const productCarouseldata = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -310,6 +322,7 @@ export const productCarouseldata = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -329,6 +342,7 @@ export const productCarouseldata = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -349,6 +363,7 @@ export const productCarouseldata = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -380,6 +395,7 @@ export const productCarouseldata = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -399,6 +415,7 @@ export const productCarouseldata = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -418,6 +435,7 @@ export const productCarouseldata = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -437,6 +455,7 @@ export const productCarouseldata = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -457,6 +476,7 @@ export const productCarouseldata = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -488,6 +508,7 @@ export const productCarouseldata = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -507,6 +528,7 @@ export const productCarouseldata = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -526,6 +548,7 @@ export const productCarouseldata = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -545,6 +568,7 @@ export const productCarouseldata = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -565,6 +589,7 @@ export const productCarouseldata = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -598,6 +623,8 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Yellow Plate",
+
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -617,6 +644,8 @@ export const productCarouseldata1 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Yellow Plate",
+
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -636,6 +665,8 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Yellow Plate",
+
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -655,6 +686,8 @@ export const productCarouseldata1 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Yellow Plate",
+
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -675,6 +708,8 @@ export const productCarouseldata1 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Yellow Plate",
+
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -706,6 +741,7 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "The Place, Lagos",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -725,6 +761,7 @@ export const productCarouseldata1 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "The Place, Lagos",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -744,6 +781,7 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "The Place, Lagos",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -763,6 +801,7 @@ export const productCarouseldata1 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "The Place, Lagos",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -783,6 +822,7 @@ export const productCarouseldata1 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "The Place, Lagos",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -814,6 +854,7 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Lekki, Lagos, Nigeria",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -833,6 +874,7 @@ export const productCarouseldata1 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Lekki, Lagos, Nigeria",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -852,6 +894,7 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Lekki, Lagos, Nigeria",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -871,6 +914,7 @@ export const productCarouseldata1 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Lekki, Lagos, Nigeria",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -891,6 +935,7 @@ export const productCarouseldata1 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Lekki, Lagos, Nigeria",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -922,6 +967,7 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -941,6 +987,7 @@ export const productCarouseldata1 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -960,6 +1007,7 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -979,6 +1027,7 @@ export const productCarouseldata1 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -999,6 +1048,7 @@ export const productCarouseldata1 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -1030,6 +1080,7 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -1049,6 +1100,7 @@ export const productCarouseldata1 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -1068,6 +1120,7 @@ export const productCarouseldata1 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -1087,6 +1140,7 @@ export const productCarouseldata1 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -1107,6 +1161,7 @@ export const productCarouseldata1 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -1126,7 +1181,6 @@ export const productCarouseldata2 = [
       "https://images.pexels.com/photos/2909822/pexels-photo-2909822.jpeg?auto=compress&cs=tinysrgb&w=600",
     text: "Ada's Canteen",
     location: "Hillbury, United Kingdom",
-    from: "Hillbury, United Kingdom",
     rating: "4.7",
     time: "8:30am - 10:00pm",
     amount: "2500.00",
@@ -1141,6 +1195,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Ada's Canteen",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -1160,6 +1215,7 @@ export const productCarouseldata2 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Ada's Canteen",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -1179,6 +1235,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Ada's Canteen",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -1198,6 +1255,7 @@ export const productCarouseldata2 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Ada's Canteen",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -1218,6 +1276,7 @@ export const productCarouseldata2 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Ada's Canteen",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -1249,6 +1308,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Albert Coffee",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -1268,6 +1328,7 @@ export const productCarouseldata2 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Albert Coffee",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -1287,6 +1348,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Albert Coffee",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -1306,6 +1368,7 @@ export const productCarouseldata2 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Albert Coffee",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -1326,6 +1389,7 @@ export const productCarouseldata2 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Albert Coffee",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -1357,6 +1421,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -1376,6 +1441,7 @@ export const productCarouseldata2 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -1395,6 +1461,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -1414,6 +1481,7 @@ export const productCarouseldata2 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -1434,6 +1502,7 @@ export const productCarouseldata2 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Amala Haven",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -1465,6 +1534,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -1484,6 +1554,7 @@ export const productCarouseldata2 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -1503,6 +1574,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -1522,6 +1594,7 @@ export const productCarouseldata2 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -1542,6 +1615,7 @@ export const productCarouseldata2 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Nasr Restaurant",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -1573,6 +1647,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat",
         checkName: "Spag",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Spag", checked: false },
@@ -1592,6 +1667,7 @@ export const productCarouseldata2 = [
         description: "Contains milk, egg and soy.",
         checkName: "Milk",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Fresh Cow Milk", checked: false },
@@ -1611,6 +1687,7 @@ export const productCarouseldata2 = [
         description: "Contains extra beef and minced meat.",
         checkName: "Rice",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Basmati Rice", checked: false },
@@ -1630,6 +1707,7 @@ export const productCarouseldata2 = [
         description: "Contains yam, plantain and crayfish.",
         checkName: "Yam",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Mashed Yam", checked: false },
@@ -1650,6 +1728,7 @@ export const productCarouseldata2 = [
           "Pepperoni, ham, italian sausage, mushrooms, black olives.",
         checkName: "Pizza",
         checkedName: "",
+        storeName: "Trey's Place",
         quantity: 0,
         checklist: [
           { id: 1, text: "Piz + Plantain", checked: false },
@@ -1662,298 +1741,6 @@ export const productCarouseldata2 = [
     ],
   },
 ];
-export const orderCarouseldata = [
-  {
-    id: "1",
-    bgImg:
-      "https://images.pexels.com/photos/2909822/pexels-photo-2909822.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Spaghetti Bolongese",
-    amount: "2500.00",
-    prevAmount: "4,200.00",
-    description: "Contains extra beef and minced meat",
-    checkName: "Spag",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Basmati Spag", checked: false },
-      { id: 2, text: "Long Grain + Shrimps", checked: false },
-      { id: 3, text: "Curry Peppered Spice", checked: false },
-      { id: 4, text: "Spaghettini + Beef", checked: false },
-      { id: 5, text: "No Spag - Just Beef", checked: false },
-    ],
-  },
-  {
-    id: "2",
-    bgImg:
-      "https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    text: "Milkshake",
-    amount: "3500.00",
-    prevAmount: "3,800.00",
-    description: "Contains milk, egg and soy.",
-    checkName: "Milk",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Fresh Cow Milk", checked: false },
-      { id: 2, text: "Add Sugar", checked: false },
-      { id: 3, text: "Processed Milk", checked: false },
-      { id: 4, text: "Add banana", checked: false },
-      { id: 5, text: "No additives", checked: false },
-    ],
-  },
-  {
-    id: "3",
-    bgImg:
-      "https://images.pexels.com/photos/6260921/pexels-photo-6260921.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Smoked Jollof Rice",
-    amount: "5000.00",
-    prevAmount: "6,200.00",
-    description: "Contains extra beef and minced meat.",
-    checkName: "Rice",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Basmati Rice", checked: false },
-      { id: 2, text: "Long Grain + Shrimps", checked: false },
-      { id: 3, text: "Curry Peppered Spice", checked: false },
-      { id: 4, text: "Short Grain + Beef", checked: false },
-      { id: 5, text: "No Rice - Just Beef", checked: false },
-    ],
-  },
-  {
-    id: "4",
-    bgImg:
-      "https://images.pexels.com/photos/2909822/pexels-photo-2909822.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Porridge",
-    amount: "3300.00",
-    prevAmount: "4,100.00",
-    description: "Contains yam, plantain and crayfish.",
-    checkName: "Yam",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Mashed Yam", checked: false },
-      { id: 2, text: "Porridge + Shrimps", checked: false },
-      { id: 3, text: "Curry Peppered Spice", checked: false },
-      { id: 4, text: "Mashed Yam + Beef", checked: false },
-      { id: 5, text: "No Yam - Just Plantain", checked: false },
-    ],
-  },
-  {
-    id: "5",
-    bgImg:
-      "https://images.pexels.com/photos/845802/pexels-photo-845802.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Pizza",
-    amount: "3200.00",
-    prevAmount: "4,200.00",
-    description: "Pepperoni, ham, italian sausage, mushrooms, black olives.",
-    checkName: "Pizza",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Piz + Plantain", checked: false },
-      { id: 2, text: "Add raisins", checked: false },
-      { id: 3, text: "Large Size + Chicken", checked: false },
-      { id: 4, text: "Short size + Beef", checked: false },
-      { id: 5, text: "No Rice - Just Chickwizz", checked: false },
-    ],
-  },
-];
-export const orderCarouseldata1 = [
-  {
-    id: "1",
-    bgImg:
-      "https://images.pexels.com/photos/2909822/pexels-photo-2909822.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Spaghetti Bolongese",
-    amount: "2500.00",
-    prevAmount: "4,200.00",
-    description: "Contains extra beef and minced meat",
-    checkName: "Spag",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Basmati Spag", checked: false },
-      { id: 2, text: "Long Grain + Shrimps", checked: false },
-      { id: 3, text: "Curry Peppered Spice", checked: false },
-      { id: 4, text: "Spaghettini + Beef", checked: false },
-      { id: 5, text: "No Spag - Just Beef", checked: false },
-    ],
-  },
-  {
-    id: "2",
-    bgImg:
-      "https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    text: "Milkshake",
-    amount: "3500.00",
-    prevAmount: "3,800.00",
-    description: "Contains milk, egg and soy.",
-    checkName: "Milk",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Fresh Cow Milk", checked: false },
-      { id: 2, text: "Add Sugar", checked: false },
-      { id: 3, text: "Processed Milk", checked: false },
-      { id: 4, text: "Add banana", checked: false },
-      { id: 5, text: "No additives", checked: false },
-    ],
-  },
-  {
-    id: "3",
-    bgImg:
-      "https://images.pexels.com/photos/6260921/pexels-photo-6260921.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Smoked Jollof Rice",
-    amount: "5000.00",
-    prevAmount: "6,200.00",
-    description: "Contains extra beef and minced meat.",
-    checkName: "Rice",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Basmati Rice", checked: false },
-      { id: 2, text: "Long Grain + Shrimps", checked: false },
-      { id: 3, text: "Curry Peppered Spice", checked: false },
-      { id: 4, text: "Short Grain + Beef", checked: false },
-      { id: 5, text: "No Rice - Just Beef", checked: false },
-    ],
-  },
-  {
-    id: "4",
-    bgImg:
-      "https://images.pexels.com/photos/2909822/pexels-photo-2909822.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Porridge",
-    amount: "3300.00",
-    prevAmount: "4,100.00",
-    description: "Contains yam, plantain and crayfish.",
-    checkName: "Yam",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Mashed Yam", checked: false },
-      { id: 2, text: "Porridge + Shrimps", checked: false },
-      { id: 3, text: "Curry Peppered Spice", checked: false },
-      { id: 4, text: "Mashed Yam + Beef", checked: false },
-      { id: 5, text: "No Yam - Just Plantain", checked: false },
-    ],
-  },
-  {
-    id: "5",
-    bgImg:
-      "https://images.pexels.com/photos/845802/pexels-photo-845802.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Pizza",
-    amount: "3200.00",
-    prevAmount: "4,200.00",
-    description: "Pepperoni, ham, italian sausage, mushrooms, black olives.",
-    checkName: "Pizza",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Piz + Plantain", checked: false },
-      { id: 2, text: "Add raisins", checked: false },
-      { id: 3, text: "Large Size + Chicken", checked: false },
-      { id: 4, text: "Short size + Beef", checked: false },
-      { id: 5, text: "No Rice - Just Chickwizz", checked: false },
-    ],
-  },
-];
-export const orderCarouseldata2 = [
-  {
-    id: "1",
-    bgImg:
-      "https://images.pexels.com/photos/2909822/pexels-photo-2909822.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Spaghetti Bolongese",
-    amount: "2500.00",
-    prevAmount: "4,200.00",
-    description: "Contains extra beef and minced meat",
-    checkName: "Spag",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Basmati Spag", checked: false },
-      { id: 2, text: "Long Grain + Shrimps", checked: false },
-      { id: 3, text: "Curry Peppered Spice", checked: false },
-      { id: 4, text: "Spaghettini + Beef", checked: false },
-      { id: 5, text: "No Spag - Just Beef", checked: false },
-    ],
-  },
-  {
-    id: "2",
-    bgImg:
-      "https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    text: "Milkshake",
-    amount: "3500.00",
-    prevAmount: "3,800.00",
-    description: "Contains milk, egg and soy.",
-    checkName: "Milk",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Fresh Cow Milk", checked: false },
-      { id: 2, text: "Add Sugar", checked: false },
-      { id: 3, text: "Processed Milk", checked: false },
-      { id: 4, text: "Add banana", checked: false },
-      { id: 5, text: "No additives", checked: false },
-    ],
-  },
-  {
-    id: "3",
-    bgImg:
-      "https://images.pexels.com/photos/6260921/pexels-photo-6260921.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Smoked Jollof Rice",
-    amount: "5000.00",
-    prevAmount: "6,200.00",
-    description: "Contains extra beef and minced meat.",
-    checkName: "Rice",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Basmati Rice", checked: false },
-      { id: 2, text: "Long Grain + Shrimps", checked: false },
-      { id: 3, text: "Curry Peppered Spice", checked: false },
-      { id: 4, text: "Short Grain + Beef", checked: false },
-      { id: 5, text: "No Rice - Just Beef", checked: false },
-    ],
-  },
-  {
-    id: "4",
-    bgImg:
-      "https://images.pexels.com/photos/2909822/pexels-photo-2909822.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Porridge",
-    amount: "3300.00",
-    prevAmount: "4,100.00",
-    description: "Contains yam, plantain and crayfish.",
-    checkName: "Yam",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Mashed Yam", checked: false },
-      { id: 2, text: "Porridge + Shrimps", checked: false },
-      { id: 3, text: "Curry Peppered Spice", checked: false },
-      { id: 4, text: "Mashed Yam + Beef", checked: false },
-      { id: 5, text: "No Yam - Just Plantain", checked: false },
-    ],
-  },
-  {
-    id: "5",
-    bgImg:
-      "https://images.pexels.com/photos/845802/pexels-photo-845802.jpeg?auto=compress&cs=tinysrgb&w=600",
-    text: "Pizza",
-    amount: "3200.00",
-    prevAmount: "4,200.00",
-    description: "Pepperoni, ham, italian sausage, mushrooms, black olives.",
-    checkName: "Pizza",
-    checkedName: "",
-    quantity: 0,
-    checklist: [
-      { id: 1, text: "Piz + Plantain", checked: false },
-      { id: 2, text: "Add raisins", checked: false },
-      { id: 3, text: "Large Size + Chicken", checked: false },
-      { id: 4, text: "Short size + Beef", checked: false },
-      { id: 5, text: "No Rice - Just Chickwizz", checked: false },
-    ],
-  },
-];
-
 export const filterData = [
   {
     id: "1",
@@ -1981,6 +1768,56 @@ export const filterData = [
   },
   {
     id: "5",
+    bgImg:
+      "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    text: "African",
+  },
+];
+export const searchData = [
+  {
+    id: "1",
+    bgImg:
+      "https://images.pexels.com/photos/2909822/pexels-photo-2909822.jpeg?auto=compress&cs=tinysrgb&w=600",
+    text: "Foods",
+  },
+  {
+    id: "2",
+    bgImg:
+      "https://images.pexels.com/photos/1247677/pexels-photo-1247677.jpeg?auto=compress&cs=tinysrgb&w=600",
+    text: "Snacks",
+  },
+  {
+    id: "3",
+    bgImg:
+      "https://images.pexels.com/photos/1651166/pexels-photo-1651166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    text: "Drinks",
+  },
+  {
+    id: "4",
+    bgImg:
+      "https://images.pexels.com/photos/2909822/pexels-photo-2909822.jpeg?auto=compress&cs=tinysrgb&w=600",
+    text: "Veggies",
+  },
+  {
+    id: "5",
+    bgImg:
+      "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    text: "African",
+  },
+  {
+    id: "6",
+    bgImg:
+      "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    text: "African",
+  },
+  {
+    id: "7",
+    bgImg:
+      "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    text: "African",
+  },
+  {
+    id: "8",
     bgImg:
       "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     text: "African",

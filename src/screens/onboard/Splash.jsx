@@ -4,13 +4,15 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-//import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function Splash() {
   const nav = useNavigation();
   const [onboard, setOnboard] = useState(null);
 
-  AsyncStorage.getItem("onboarded", (err, value) => {  
+  const user = useSelector((state) => state.user.user);
+
+  AsyncStorage.getItem("onboarded", (err, value) => {
     if (err) {
       console.log(err);
     } else {
@@ -23,9 +25,13 @@ export default function Splash() {
       setTimeout(() => {
         nav.navigate("Onboarding");
       }, 2000);
+    } else if (user === true) {
+      setTimeout(() => {
+        nav.replace("Dashboard");
+      }, 2000);
     } else {
       setTimeout(() => {
-        nav.navigate("Login");
+        nav.replace("Login");
       }, 2000);
     }
   }, []);

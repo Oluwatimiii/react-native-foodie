@@ -1,31 +1,46 @@
 import {
-  ScrollView,
   StyleSheet,
+  Modal,
   Text,
+  SafeAreaView,
   TouchableOpacity,
   View,
+  Pressable,
+  ActivityIndicator
 } from "react-native";
-import React from "react";
-import { signOut } from "firebase/auth";
+import React, { useRef, useState } from "react";
+import { deleteUser, signOut } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../../store/UserSlice";
+import { resetAuthState, setUser } from "../../../store/UserSlice";
+
+import BottomSheet from "../../components/DashComponents/BottomSheet";
 
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
+import { responsiveWidth } from "react-native-responsive-dimensions";
 import { responsiveHeight } from "react-native-responsive-dimensions";
 import { myTheme } from "../../utils/Theme";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { clearProduct } from "../../../store/ProductReducer";
+import { clearCart } from "../../../store/CartReducer";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const userEmail = useSelector((state) => state.user.userData);
   const firstTwo = userEmail.slice(0, 3);
 
-  console.log(userEmail);
+  const [displayModal, setDisplayModal] = useState(false)
+  const [displayModals, setDisplayModals] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const logOut = async () => {
+    await AsyncStorage.clear();
+    dispatch(resetAuthState());
+    dispatch(clearProduct());
+    dispatch(clearCart([]));
     await signOut(auth)
       .then((data) => {
         dispatch(setUser(false));
@@ -36,8 +51,35 @@ const Profile = () => {
       });
   };
 
+  const deleteAccount = () => {
+    setLoading(true)
+    const user = auth.currentUser
+    console.log(user, "current user")
+    setLoading(false)
+
+    deleteUser(user).then(async () => {
+      await AsyncStorage.clear();
+      dispatch(resetAuthState());
+      dispatch(clearProduct());
+      dispatch(clearCart([]));
+      dispatch(setUser(false));
+      setLoading(false)
+      console.log("User Account Deleted Successful");
+    }).catch((error) => {
+      setLoading(false)
+      console.log("an error occured")
+    })
+  }
+
+  const bottomSheetRef = useRef(null)
+
+  const openModal = () => {
+    bottomSheetRef.current?.present()
+  }
+
   return (
-    <ScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <BottomSheet ref={bottomSheetRef} />
       {/* Profile Box */}
       <View style={styles.flexIn}>
         <View style={styles.imgBkg}>
@@ -65,6 +107,88 @@ const Profile = () => {
         </Text>
       </View>
 
+      {/* LOGOUT MODAL */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        presentationStyle="overFullScreen"
+        visible={displayModal}
+        onRequestClose={() => setDisplayModal(false)}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={[styles.modalText, { fontWeight: "bold" }]}>
+              Are you sure you want to sign out?
+            </Text>
+            <Text style={[styles.modalSubText]}>
+              NOTE: This action clears your cart!
+            </Text>
+
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                gap: 14,
+              }}
+            >
+              <Pressable
+                style={[styles.button, styles.buttonOpen]}
+                onPress={() => setDisplayModal(false)}
+              >
+                <Text style={styles.textStyle}>CANCEL</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={logOut}
+              >
+                <Text style={styles.textStyle}>SIGN OUT</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Delete address modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        presentationStyle="overFullScreen"
+        visible={displayModals}
+        onRequestClose={() => setDisplayModals(false)}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={[styles.modalText, { fontWeight: "bold", paddingHorizontal: responsiveWidth(13), }]}>
+              Are you sure you want to permanently delete your account?
+            </Text>
+            <Text style={[styles.modalSubText]}>
+              NOTE: This action can only be done once!
+            </Text>
+
+            {
+              loading ? (<View style={{ alignSelf: "center" }}>
+                <ActivityIndicator color={myTheme.primary} />
+              </View>) : (<View style={styles.viewss}>
+                <Pressable
+                  style={[styles.button, styles.buttonOpen]}
+                  onPress={() => setDisplayModals(false)}
+                >
+                  <Text style={styles.textStyle}>CANCEL</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={deleteAccount}
+                >
+                  <Text style={styles.textStyle}>DELETE ACCOUNT</Text>
+                </Pressable>
+              </View>)
+            }
+
+          </View>
+        </View>
+      </Modal>
+
       {/* Touchable Links */}
       <View style={styles.views}>
         {/* My orders */}
@@ -89,7 +213,7 @@ const Profile = () => {
 
           <AntDesign name="arrowright" size={20} color={myTheme.fade} />
         </TouchableOpacity>
-        {/* Favourite Stores */}
+        {/* Favourite Orders */}
         <TouchableOpacity style={styles.touch}>
           <View
             style={{
@@ -112,7 +236,7 @@ const Profile = () => {
           <AntDesign name="arrowright" size={20} color={myTheme.fade} />
         </TouchableOpacity>
         {/* My Address */}
-        <TouchableOpacity style={styles.touch}>
+        <TouchableOpacity style={styles.touch} onPress={openModal} >
           <View
             style={{
               flexDirection: "row",
@@ -177,28 +301,6 @@ const Profile = () => {
 
           <AntDesign name="arrowright" size={20} color={myTheme.fade} />
         </TouchableOpacity>
-        {/* Settings */}
-        <TouchableOpacity style={styles.touch}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 12,
-            }}
-          >
-            <AntDesign name="setting" size={20} color={myTheme.fade} />
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: "bold",
-              }}
-            >
-              Settings
-            </Text>
-          </View>
-
-          <AntDesign name="arrowright" size={20} color={myTheme.fade} />
-        </TouchableOpacity>
         {/* About Us */}
         <TouchableOpacity style={styles.touch}>
           <View
@@ -248,7 +350,7 @@ const Profile = () => {
           <AntDesign name="arrowright" size={20} color={myTheme.fade} />
         </TouchableOpacity>
         {/* Logout */}
-        <TouchableOpacity onPress={logOut} style={styles.touch}>
+        <TouchableOpacity onPress={() => setDisplayModal(true)} style={styles.touch}>
           <View
             style={{
               flexDirection: "row",
@@ -269,19 +371,30 @@ const Profile = () => {
 
           <AntDesign name="arrowright" size={20} color={myTheme.fade} />
         </TouchableOpacity>
+        {/* Delete account */}
+        <TouchableOpacity onPress={() => setDisplayModals(true)} style={styles.touch}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <AntDesign name="setting" size={20} color={myTheme.fade} />
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+              }}
+            >
+              Delete Account
+            </Text>
+          </View>
+
+          <AntDesign name="arrowright" size={20} color={myTheme.fade} />
+        </TouchableOpacity>
       </View>
-      {/* <TouchableOpacity
-       
-        style={{
-          padding: 20,
-          alignItems: "center",
-          backgroundColor: "green",
-          justifyContent: "center",
-        }}
-      >
-        <Text>Sign Out</Text>
-      </TouchableOpacity> */}
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -291,7 +404,7 @@ const styles = StyleSheet.create({
   imgBkg: {
     padding: 25,
     alignItems: "center",
-    borderRadius: 4,
+    borderRadius: 50,
     backgroundColor: myTheme.primary,
   },
   flexIn: {
@@ -311,5 +424,58 @@ const styles = StyleSheet.create({
     borderBottomColor: myTheme.fade,
     borderBottomWidth: 0.5,
     paddingVertical: 15,
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    paddingVertical: 40,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: responsiveWidth(85),
+  },
+  viewss: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    gap: 14,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: myTheme.primary,
+  },
+  buttonClose: {
+    backgroundColor: "red",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.7)",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 8,
+    textAlign: "center",
+    fontSize: 16
+  },
+  modalSubText: {
+    marginBottom: 17,
+    textAlign: "center",
+    fontSize: 13
   },
 });

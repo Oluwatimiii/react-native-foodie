@@ -6,13 +6,9 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useState } from "react";
 import ProductTitle from "./ProductTitle";
-import { filterData } from "../data/data";
 
-const Filters = () => {
-  const [data, setData] = useState(filterData);
-
+const Filters = ({ datas }) => {
   return (
     <View>
       <ProductTitle text="Filter By" />
@@ -24,13 +20,13 @@ const Filters = () => {
         }}
       >
         <FlatList
-          data={data}
+          data={datas}
           renderItem={({ item }) => (
             <View
               style={{
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center'
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <TouchableOpacity

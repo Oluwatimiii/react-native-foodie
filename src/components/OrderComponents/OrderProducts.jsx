@@ -1,11 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import OrderDetailsCarousel from "./OrderDetailsCarousel";
-import {
-  orderCarouseldata,
-  orderCarouseldata1,
-  orderCarouseldata2,
-} from "../data/data";
 import { responsiveHeight } from "react-native-responsive-dimensions";
 
 const OrderProducts = ({ orderData }) => {
@@ -17,7 +12,7 @@ const OrderProducts = ({ orderData }) => {
       }}
     >
       <OrderDetailsCarousel
-        datas={orderCarouseldata}
+        datas={orderData[0].store}
         text="Suggested"
         viewAll={false}
       />
