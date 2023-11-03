@@ -42,7 +42,6 @@ const ProductDetails = ({ route, navigation }) => {
   const { productId, dataFile } = route.params;
 
   const data = dataFile.filter((data) => data?.id === productId);
-  console.log("data0", data[0]);
 
   const setCart = () => {
     dispatch(setDataCart(data[0]));

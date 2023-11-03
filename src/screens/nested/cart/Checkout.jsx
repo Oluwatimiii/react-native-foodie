@@ -30,7 +30,6 @@ const Checkout = () => {
   // Fetching cart details
   const cart = useSelector((state) => state.cart.cart);
   const dataCheckout = useSelector((state) => state.user.dataCart);
-  console.log("checkd", dataCheckout);
 
   const total = cart
     .map((item) => item.quantity * item.amount)

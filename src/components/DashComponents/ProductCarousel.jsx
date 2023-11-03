@@ -32,8 +32,8 @@ const ProductCarousel = ({ text, viewAll, datas, horizon }) => {
     const storeName = clickedStore[0].text;
 
     const storeNotPresent = cart?.some((item) => item?.storeName !== storeName);
-    console.log(storeNotPresent, "Not in cart");
-    console.log(storeName);
+    // console.log(storeNotPresent, "Not in cart");
+    // console.log(storeName);
 
     if (storeNotPresent === false) {
       navigation.navigate("HomeStack", {

@@ -35,6 +35,8 @@ const SignUp = ({ navigation }) => {
   const [showErrors, setShowErrors] = useState(false);
   const [errors, setErrors] = useState({});
 
+  const dispatch = useDispatch();
+
   const getErrors = (email, password) => {
     const errors = {};
 
@@ -54,8 +56,6 @@ const SignUp = ({ navigation }) => {
   };
 
   const handleSignUp = async () => {
-    const dispatch = useDispatch();
-
     setLoading(true);
     const errors = getErrors(email, password);
     if (Object.keys(errors).length > 0) {

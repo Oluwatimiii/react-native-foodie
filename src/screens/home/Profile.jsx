@@ -44,21 +44,20 @@ const Profile = () => {
     await signOut(auth)
       .then((data) => {
         dispatch(setUser(false));
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+
   const deleteAccount = () => {
-    setLoading(true)
     const user = auth.currentUser
     console.log(user, "current user")
-    setLoading(false)
+    setLoading(true)
 
-    deleteUser(user).then(async () => {
-      await AsyncStorage.clear();
+    deleteUser(user).then(() => {
+      AsyncStorage.clear();
       dispatch(resetAuthState());
       dispatch(clearProduct());
       dispatch(clearCart([]));
