@@ -20,7 +20,7 @@ import {
 import { myTheme } from "../../../utils/Theme";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { clearCart } from "../../../../store/CartReducer";
+import { clearCart, duplicateCart } from "../../../../store/CartReducer";
 
 // const ios = (Platform.OS = "ios");
 
@@ -29,6 +29,10 @@ const Checkout = () => {
   const location = useSelector((state) => state.user.userLocation);
   // Fetching cart details
   const cart = useSelector((state) => state.cart.cart);
+  console.log("crateckout", cart);
+  //getting total order details
+  const orderDetails = useSelector((state) => state.cart.orderDetails);
+  console.log("orderDet-checkout", orderDetails);
   const dataCheckout = useSelector((state) => state.user.dataCart);
 
   const total = cart
@@ -63,9 +67,11 @@ const Checkout = () => {
     if (selectedValue === "Card") {
       navigation.navigate("Payment");
     } else {
+      dispatch(duplicateCart())
       navigation.replace("Successful");
       dispatch(clearCart([]));
-      console.log(cart);
+      console.log("cart-checkout", cart);
+      console.log("orderDet-checkout", orderDetails);
     }
   };
 

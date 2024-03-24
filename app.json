@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "metaNative",
-    "slug": "metaNative",
+    "name": "Foodie",
+    "slug": "foodieApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -18,6 +21,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "timi.foodieapp",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -25,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "40afed89-4f72-4862-93f7-6bfc0d4b2ab6"
+      }
     }
   }
 }

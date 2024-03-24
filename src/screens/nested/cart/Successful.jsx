@@ -73,9 +73,34 @@ const Successful = () => {
         </View>
         <View
           style={{
-            width: "100%",
+            width: "80%",
+            gap: 10
           }}
         >
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("HomeStack", {
+                screen: "Dashboard",
+              })
+            }
+            style={{
+              backgroundColor: myTheme.primary,
+              width: "100%",
+              paddingVertical: responsiveHeight(2),
+              borderRadius: 8,
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 21,
+                textAlign: "center",
+              }}
+            >
+              Download receipt
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("HomeStack", {

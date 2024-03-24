@@ -326,6 +326,32 @@ const Profile = () => {
 
           <AntDesign name="arrowright" size={20} color={myTheme.fade} />
         </TouchableOpacity>
+        {/* Chat with Us */}
+        <TouchableOpacity style={styles.touch}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <AntDesign
+              name="wechat"
+              size={20}
+              color={myTheme.fade}
+            />
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+              }}
+            >
+                Chat with us
+            </Text>
+          </View>
+
+          <AntDesign name="arrowright" size={20} color={myTheme.fade} />
+        </TouchableOpacity>
         {/* Faqs */}
         <TouchableOpacity style={styles.touch}>
           <View

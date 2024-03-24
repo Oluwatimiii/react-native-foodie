@@ -24,7 +24,6 @@ import {
 } from "../../components/data/data";
 
 import { Entypo } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import { Foundation } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,11 +45,6 @@ export default function Dashboard({ navigation }) {
     dispatch(clearCart([]));
     dispatch(setDisplayStore(false));
   };
-
-  const enableLocation = () => {
-    setErrorMsg("")
-    getBackgroundLocationPermission()
-  }
 
   // const bottomSheetRef = useRef(null)
 
@@ -78,7 +72,7 @@ export default function Dashboard({ navigation }) {
             onPress: () => setErrorMsg('Permission to access location was denied'),
             style: "cancel",
           },
-          { text: "Open settings", onPress: () => enableLocation() },
+          { text: "Open settings", onPress: () => getBackgroundLocationPermission() },
         ]);
       }
     } else {
@@ -87,6 +81,7 @@ export default function Dashboard({ navigation }) {
   };
 
   const getBackgroundLocationPermission = async () => {
+    setErrorMsg("")
     const { status } = await Location.requestBackgroundPermissionsAsync();
     if (status !== 'granted') {
       setErrorMsg('Permission to access background location was denied');
@@ -98,18 +93,19 @@ export default function Dashboard({ navigation }) {
 
 
   const getCurrentLocation = async () => {
+    console.log("infetCurrent")
     const { coords } = await Location.getCurrentPositionAsync({});
     if (coords) {
       const { latitude, longitude } = coords;
 
+      //Convert geocodes to postal address location - FIX THIS!!!! 
       let response = await Location.reverseGeocodeAsync({
         latitude,
         longitude,
       });
-
+      console.log(response, "response")
       for (let item of response) {
         const setLocations = `${item?.street ? item?.street : "No street found"}, ${item?.city}, ${item?.region} - ${item.country}`;
-
         dispatch(setUserLocation(setLocations));
       }
     }
