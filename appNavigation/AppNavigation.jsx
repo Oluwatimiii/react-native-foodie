@@ -33,8 +33,6 @@ import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Payment from "../src/screens/nested/cart/Payment";
 import Successful from "../src/screens/nested/cart/Successful";
-import LocationSearch from "../src/screens/onboard/LocationSearch";
-
 
 
 const AuthStack = createNativeStackNavigator();

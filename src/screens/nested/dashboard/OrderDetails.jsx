@@ -22,6 +22,7 @@ import { addToCart } from "../../../../store/CartReducer";
 import { incrementQty } from "../../../../store/ProductReducer";
 import { useDispatch } from "react-redux";
 
+// Check platform on ios
 const ios = Platform.OS === "ios";
 
 const OrderDetails = ({ route, navigation }) => {

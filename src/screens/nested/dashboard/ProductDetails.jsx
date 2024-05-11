@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { myTheme } from "../../../utils/Theme";
 import { HeartIcon } from "react-native-heroicons/solid";
@@ -38,8 +38,15 @@ const ProductDetails = ({ route, navigation }) => {
 
   const [favBtn, setFavBtn] = useState(false);
   const [openSimilar, setOpenSimilar] = useState(false);
+  const { productId, dataFile, scrollToTop } = route.params;
 
-  const { productId, dataFile } = route.params;
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollToTop) {
+      scrollRef.current?.scrollTo({ y: 0, animated: true });
+    }
+  }, [route.params]);
 
   const data = dataFile.filter((data) => data?.id === productId);
 
@@ -53,6 +60,7 @@ const ProductDetails = ({ route, navigation }) => {
   return (
     <>
       <ScrollView
+        ref={scrollRef}
         style={{
           flex: 1,
           backgroundColor: "white",

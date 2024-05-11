@@ -32,6 +32,7 @@ import { clearCart } from "../../../store/CartReducer";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 
 import BottomSheet from "../../components/DashComponents/BottomSheet";
+import CustomStatusBar from "../../components/DashComponents/StatusBar";
 
 export default function Dashboard({ navigation }) {
   const [errorMsg, setErrorMsg] = useState("");
@@ -122,6 +123,8 @@ export default function Dashboard({ navigation }) {
         gap: 17,
       }}
     >
+      {/* STATUS BAR */}
+      <CustomStatusBar />
       {/* HEADER */}
       <View
         style={{

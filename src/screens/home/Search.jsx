@@ -19,6 +19,7 @@ import {
 } from "react-native-responsive-dimensions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { myTheme } from "../../utils/Theme";
+import CustomStatusBar from "../../components/DashComponents/StatusBar";
 
 const Search = () => {
   const [data, setData] = useState(searchData);
@@ -81,6 +82,8 @@ const Search = () => {
         backgroundColor: "white",
       }}
     >
+      {/* STATUS BAR */}
+      <CustomStatusBar />
       {/* Text Input */}
       <View
         style={{

@@ -41,6 +41,7 @@ const ProductCarousel = ({ text, viewAll, datas, horizon }) => {
         params: {
           productId: id,
           dataFile: datas,
+          scrollToTop: true
         },
       });
     } else {
@@ -121,7 +122,7 @@ const ProductCarousel = ({ text, viewAll, datas, horizon }) => {
                     </View>
                   </View>
 
-                  {/* Job Details View --BOTTOM */}
+                  {/* Details View --BOTTOM */}
                   <View
                     style={{
                       position: "absolute",

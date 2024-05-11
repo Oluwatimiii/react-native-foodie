@@ -27,6 +27,7 @@ import {
 } from "../../../store/CartReducer";
 import { decrementQty, incrementQty } from "../../../store/ProductReducer";
 import { useRoute } from "@react-navigation/native";
+import CustomStatusBar from "../../components/DashComponents/StatusBar";
 
 const { width, height } = Dimensions.get("window");
 
@@ -64,6 +65,8 @@ const Cart = ({ navigation }) => {
       }}
       showsVerticalScrollIndicator={false}
     >
+      {/* STATUS BAR */}
+      <CustomStatusBar />
       {total === 0 ? (
         <View
           style={{

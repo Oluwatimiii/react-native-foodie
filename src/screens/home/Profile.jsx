@@ -26,6 +26,7 @@ import { myTheme } from "../../utils/Theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { clearProduct } from "../../../store/ProductReducer";
 import { clearCart } from "../../../store/CartReducer";
+import CustomStatusBar from "../../components/DashComponents/StatusBar";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -78,6 +79,8 @@ const Profile = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      {/* STATUS BAR */}
+      <CustomStatusBar />
       <BottomSheet ref={bottomSheetRef} />
       {/* Profile Box */}
       <View style={styles.flexIn}>
