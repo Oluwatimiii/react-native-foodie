@@ -18,7 +18,7 @@ export default function OnboardingScreen() {
   const nav = useNavigation();
 
   const handleDone = async () => {
-    await AsyncStorage.setItem("onboarded", JSON.stringify(false))
+    await AsyncStorage.setItem("onboarded", JSON.stringify(1))
     nav.navigate("Login");
   };
 

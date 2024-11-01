@@ -6,6 +6,7 @@ const initialState = {
   userLocation: "",
   displayStore: false,
   dataCart: [],
+  favoriteStores: []
 };
 
 export const userSlice = createSlice({
@@ -27,12 +28,26 @@ export const userSlice = createSlice({
     setDataCart: (state, action) => {
       state.dataCart = action.payload;
     },
+    setFavoriteStores: (state, action) => {
+      const storePresent = state.favoriteStores.find(
+        (store) =>
+          store[0]?.text === action.payload[0]?.text
+      );
+
+      if (!storePresent) {
+        state.favoriteStores = [...state.favoriteStores, action.payload];
+      }
+    },
+    removeFavoriteStores: (state, action) => {
+      state.favoriteStores = state.favoriteStores.filter((store) => store[0]?.text !== action.payload);
+    },
     resetAuthState: (state) => {
       state.user = false;
       state.userData = "";
       state.userLocation = "";
       state.displayStore = false;
       state.dataCart = [];
+      state.favoriteStores = [];
     },
   },
 });
@@ -44,6 +59,8 @@ export const {
   setDisplayStore,
   resetAuthState,
   setDataCart,
+  setFavoriteStores,
+  removeFavoriteStores,
 } = userSlice.actions;
 
 export default userSlice.reducer;

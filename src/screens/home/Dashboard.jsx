@@ -94,7 +94,6 @@ export default function Dashboard({ navigation }) {
 
 
   const getCurrentLocation = async () => {
-    console.log("infetCurrent")
     const { coords } = await Location.getCurrentPositionAsync({});
     if (coords) {
       const { latitude, longitude } = coords;

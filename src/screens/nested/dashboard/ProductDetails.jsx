@@ -24,7 +24,7 @@ import {
 import ProductCarousel from "../../../components/DashComponents/ProductCarousel";
 import OrderProducts from "../../../components/OrderComponents/OrderProducts";
 import { useDispatch, useSelector } from "react-redux";
-import { setDataCart } from "../../../../store/UserSlice";
+import { removeFavoriteStores, setDataCart, setFavoriteStores } from "../../../../store/UserSlice";
 
 const ios = Platform.OS === "ios";
 
@@ -36,10 +36,25 @@ const ProductDetails = ({ route, navigation }) => {
 
   const dispatch = useDispatch();
 
-  const [favBtn, setFavBtn] = useState(false);
   const [openSimilar, setOpenSimilar] = useState(false);
   const { productId, dataFile, scrollToTop } = route.params;
 
+
+  const data = dataFile.filter((data) => data?.id === productId);
+  const [productData, setProductData] = useState(data[0]);
+
+  // Fetching favorites details
+  const favoriteStores = useSelector((state) => state.user.favoriteStores);
+
+  const savedFavStore = favoriteStores.find(
+    (store) =>
+      store[0]?.text === data[0]?.text
+  );
+
+  //console.log("fresh fave", favoriteStores)
+  //console.log("fresh fave", favoriteStores.filter((store) => store[0]?.text !== data[0]?.text))
+
+  // Scroll to top on carousel click
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -48,14 +63,31 @@ const ProductDetails = ({ route, navigation }) => {
     }
   }, [route.params]);
 
-  const data = dataFile.filter((data) => data?.id === productId);
 
+  //add to cart
   const setCart = () => {
-    dispatch(setDataCart(data[0]));
+    dispatch(setDataCart(productData));
     navigation.navigate("CartStack", {
       screen: "Cart",
     });
   };
+
+  // add store to favorites array
+  const addFavoriteStores = async () => {
+    const updatedData = {
+      ...productData,
+      favorited: !productData?.favorited,
+    };
+    await setProductData(updatedData)
+
+    if (updatedData?.favorited === true && !savedFavStore) {
+      dispatch(setFavoriteStores([updatedData]))
+      console.log("added fav")
+    } else {
+      dispatch(removeFavoriteStores(data[0]?.text))
+      console.log("unliked fav")
+    }
+  }
 
   return (
     <>
@@ -89,11 +121,11 @@ const ProductDetails = ({ route, navigation }) => {
 
               <TouchableOpacity
                 style={styles.iconBg}
-                onPress={() => setFavBtn(!favBtn)}
+                onPress={addFavoriteStores}
               >
                 <HeartIcon
                   size="22"
-                  color={favBtn ? myTheme.primary : myTheme.fade}
+                  color={savedFavStore ? myTheme.primary : myTheme.fade}
                 />
               </TouchableOpacity>
             </View>
@@ -101,7 +133,7 @@ const ProductDetails = ({ route, navigation }) => {
         </SafeAreaView>
 
         <View>
-          <Image source={{ uri: data[0]?.bgImg }} style={styles.image} />
+          <Image source={{ uri: productData?.bgImg }} style={styles.image} />
           <View
             style={{
               paddingHorizontal: 18,
@@ -115,7 +147,7 @@ const ProductDetails = ({ route, navigation }) => {
                 fontSize: 24,
               }}
             >
-              {data[0]?.text}
+              {productData?.text}
             </Text>
             <View
               style={{
@@ -137,7 +169,7 @@ const ProductDetails = ({ route, navigation }) => {
                     fontSize: 16,
                   }}
                 >
-                  {data[0]?.rating} - (13 ratings)
+                  {productData?.rating} - (13 ratings)
                 </Text>
               </View>
               <View
@@ -154,7 +186,7 @@ const ProductDetails = ({ route, navigation }) => {
                     fontWeight: "600",
                   }}
                 >
-                  Open from : {data[0]?.time}
+                  Open from : {productData?.time}
                 </Text>
               </View>
               <View
@@ -177,7 +209,7 @@ const ProductDetails = ({ route, navigation }) => {
                     fontWeight: "600",
                   }}
                 >
-                  {data[0]?.location}
+                  {productData?.location}
                 </Text>
               </View>
             </View>

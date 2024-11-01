@@ -33,6 +33,7 @@ import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Payment from "../src/screens/nested/cart/Payment";
 import Successful from "../src/screens/nested/cart/Successful";
+import Favorites from "../src/screens/nested/profile/Favorites";
 
 
 const AuthStack = createNativeStackNavigator();
@@ -154,6 +155,40 @@ export default function AppNavigation() {
     );
   };
 
+
+  // PROFILE STACK
+  const ProfileStack = createNativeStackNavigator();
+
+  const ProfileStackScreen = () => {
+    return (
+      <ProfileStack.Navigator
+        initialRouteName="Profile">
+        <ProfileStack.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <ProfileStack.Screen
+          name="Favorites"
+          component={Favorites}
+          options={{
+            title: "Favorite stores",
+            headerLeft: () => (
+              <TouchableOpacity
+                style={styles.iconBg}
+                onPress={() => navigation.goBack()}
+              >
+                <ChevronLeftIcon size="20" strokeWidth={2.1} color="white" />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+      </ProfileStack.Navigator>
+    );
+  };
+
   // Getting the current user state(logged in or not)
   const user = useSelector((state) => state.user.user);
   console.log("userstate", user);
@@ -184,6 +219,7 @@ export default function AppNavigation() {
       routeName === "OrderDetails" ||
       routeName === "Splash" ||
       routeName === "Discount" ||
+      routeName === "Favorites" ||
       routeName === "Checkout"
     ) {
       return "none";
@@ -253,20 +289,18 @@ export default function AppNavigation() {
             })}
           />
           <RootTab.Screen
-            name="Profile"
-            component={Profile}
-            options={{
+            name="ProfleStack"
+            component={ProfileStackScreen}
+            options={({ route }) => ({
               headerShown: false,
-              tabBarIcon: ({ color, size }) => {
-                return (
-                  <MaterialIcons
-                    name="account-circle"
-                    size={size}
-                    color={color}
-                  />
-                );
+              tabBarStyle: {
+                display: getTabBarVisibility(route),
+                backgroundColor: myTheme.primary,
               },
-            }}
+              tabBarIcon: ({ color, size }) => {
+                return <Ionicons name="home" size={size} color={color} />;
+              },
+            })}
           />
         </RootTab.Navigator>
       );

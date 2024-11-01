@@ -27,8 +27,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { clearProduct } from "../../../store/ProductReducer";
 import { clearCart } from "../../../store/CartReducer";
 import CustomStatusBar from "../../components/DashComponents/StatusBar";
+import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
+  const navigation = useNavigation()
   const dispatch = useDispatch();
   const userEmail = useSelector((state) => state.user.userData);
   const firstTwo = userEmail.slice(0, 3);
@@ -216,7 +218,7 @@ const Profile = () => {
           <AntDesign name="arrowright" size={20} color={myTheme.fade} />
         </TouchableOpacity>
         {/* Favourite Orders */}
-        <TouchableOpacity style={styles.touch}>
+        <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate("Favorites")}>
           <View
             style={{
               flexDirection: "row",
@@ -237,6 +239,7 @@ const Profile = () => {
 
           <AntDesign name="arrowright" size={20} color={myTheme.fade} />
         </TouchableOpacity>
+
         {/* My Address */}
         <TouchableOpacity style={styles.touch} onPress={openModal} >
           <View
@@ -349,7 +352,7 @@ const Profile = () => {
                 fontWeight: "bold",
               }}
             >
-                Chat with us
+              Chat with us
             </Text>
           </View>
 

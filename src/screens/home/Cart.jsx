@@ -26,7 +26,6 @@ import {
   incrementQuantity,
 } from "../../../store/CartReducer";
 import { decrementQty, incrementQty } from "../../../store/ProductReducer";
-import { useRoute } from "@react-navigation/native";
 import CustomStatusBar from "../../components/DashComponents/StatusBar";
 
 const { width, height } = Dimensions.get("window");

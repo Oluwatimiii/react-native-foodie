@@ -12,26 +12,33 @@ export default function Splash() {
 
   const user = useSelector((state) => state.user.user);
 
-  AsyncStorage.getItem("onboarded", (err, value) => {
-    if (err) {
-      console.log(err);
-    } else {
-      setOnboard(JSON.parse(value));
-    }
-  });
+  // AsyncStorage.getItem("onboarded", (err, value) => {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     setOnboard(JSON.parse(value));
+  //     console.log("onboard", JSON.parse(value));
+  //   }
+  // });
+
 
   useEffect(() => {
-    if (onboard === 1) {
-      setTimeout(() => {
-        nav.navigate("Onboarding");
-      }, 2000);
-    } else if (user === true) {
-      setTimeout(() => {
-        nav.replace("Dashboard");
-      }, 2000);
+    const storedOnboard = AsyncStorage.getItem("onboarded");
+    console.log("cachhueval", storedOnboard)
+
+    if (storedOnboard !== null) {
+      if (user !== true) {
+        setTimeout(() => {
+          nav.replace("Login");
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          nav.replace("Dashboard");
+        }, 2000);
+      }
     } else {
       setTimeout(() => {
-        nav.replace("Login");
+        nav.navigate("Onboarding");
       }, 2000);
     }
   }, []);

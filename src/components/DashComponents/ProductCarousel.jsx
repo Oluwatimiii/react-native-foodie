@@ -24,17 +24,19 @@ const ProductCarousel = ({ text, viewAll, datas, horizon }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart.cart);
-  // const displayStore = useSelector((state) => state.user.displayStore);
+  const [isFav, setIsFav] = useState(true)
+
+  const cart = useSelector((state) => state.cart.cart)
 
   const handlePress = (id) => {
     const clickedStore = datas.filter((data) => data?.id === id);
     const storeName = clickedStore[0].text;
 
+
     const storeNotPresent = cart?.some((item) => item?.storeName !== storeName);
     // console.log(storeNotPresent, "Not in cart");
-    // console.log(storeName);
 
+    //check if store is present in favorite's folder
     if (storeNotPresent === false) {
       navigation.navigate("HomeStack", {
         screen: "Details",
@@ -49,6 +51,8 @@ const ProductCarousel = ({ text, viewAll, datas, horizon }) => {
     }
   };
 
+
+
   return (
     <View>
       <ProductTitle text={text} viewAll={viewAll} />
@@ -56,7 +60,7 @@ const ProductCarousel = ({ text, viewAll, datas, horizon }) => {
       <View
         style={{
           width: "100%",
-          marginVertical: 10,
+          marginVertical: text ? 10 : 1,
         }}
       >
         <FlatList
@@ -117,7 +121,7 @@ const ProductCarousel = ({ text, viewAll, datas, horizon }) => {
                       <AntDesign
                         name="heart"
                         size={14}
-                        color={myTheme.primary}
+                        color={isFav ? myTheme.primary : myTheme.whiteFade}
                       />
                     </View>
                   </View>
@@ -203,7 +207,7 @@ const ProductCarousel = ({ text, viewAll, datas, horizon }) => {
           horizontal={horizon}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ columnGap: 11, rowGap: 10 }}
+          contentContainerStyle={{ columnGap: 11, rowGap: 4 }}
         />
       </View>
     </View>

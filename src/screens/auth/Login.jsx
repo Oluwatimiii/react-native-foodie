@@ -23,7 +23,6 @@ import { auth } from "../../../firebase";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../../store/UserSlice";
 import { responsiveWidth } from "react-native-responsive-dimensions";
-import { responsiveHeight } from "react-native-responsive-dimensions";
 
 const Login = ({ navigation }) => {
   const [toogleBtn, setToogleBtn] = useState(true);
